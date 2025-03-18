@@ -4,11 +4,11 @@ The Employee Management System is a web-based application built using PHP & MySQ
 
 # 🛠️Technologies Used
 
-Backend: PHP
-Frontend: HTML, CSS, Bootstrap
-Database: MySQL
-Libraries: jQuery, AJAX (if used)
-Server: XAMPP/WAMP (for local testing)
+- Backend: PHP
+- Frontend: HTML, CSS, Bootstrap
+- Database: MySQL
+- Libraries: jQuery, AJAX (if used)
+- Server: XAMPP/WAMP (for local testing)
 
 # 🚀How to Use?
 
