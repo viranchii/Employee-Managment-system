@@ -94,9 +94,9 @@ if (strlen($_SESSION['empid'] == 0)) {
                                                 <table class="table table-bordered">
                                                     <thead>
                                                         <tr>
-                                                            <th>#</th>
                                                             <th>Complaint No</th>
-                                                            <th>Complainant Name</th>
+                                                            <th>Complainant Type</th>
+                                                            <th>Issue Type</th>
                                                             <th>Reg Date</th>
                                                             <th>Status</th>
                                                             <th>Action</th>
@@ -115,11 +115,10 @@ if (strlen($_SESSION['empid'] == 0)) {
                                                         $cnt = 1;
                                                         if ($query->rowCount() > 0) {
                                                             foreach ($results as $row) { ?>
-                                                                <tr>
-                                                                    <td><?php echo htmlentities($cnt); ?></td>
                                                                     <td><?php echo htmlentities($row->complaintNumber); ?>
                                                                     </td>
-                                                                    <td><?php echo htmlentities($row->name); ?></td>
+                                                                    <td><?php echo htmlentities($row->complaintType); ?></td>
+                                                                    <td><?php echo htmlentities($row->issuetype); ?></td>
                                                                     <td> <?php echo htmlentities($row->regDate); ?></td>
                                                                     <td>
                                                                         <?php $status = $row->status;

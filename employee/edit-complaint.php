@@ -167,16 +167,20 @@ if (strlen($_SESSION['empid']) == 0) {
                             </div>
                             <!-- row -->
                             <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h5>Update Complaint</h5>
+                            <div class="col-md-12">
+                                <div class="white_shd full margin_bottom_30">
+                                    <div class="full graph_head">
+                                        <div class="heading1 margin_0">
+                                            <h5>Update Complaints</h5>
                                         </div>
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-md-10">
-
-                                                    <br />
+                                    </div>
+                                    <div class="full progress_bar_inner">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="full">
+                                                    <div class="padding_infor_info">
+                                                        <div class="alert alert-primary" role="alert">
+                                                   
                                                     <form method="post" name="complaint" enctype="multipart/form-data">
     <input type="hidden" name="complaintNumber" value="<?php echo isset($complaint['complaintNumber']) ? $complaint['complaintNumber'] : ''; ?>">
 
@@ -296,20 +300,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     <button type="submit" class="btn btn-primary" name="submit">Update Complaint</button>
 </form>
-
-                                                </div>
-
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </div>
+</div> <!-- alert alert-primary -->
+                                                    </div> <!-- padding_infor_info -->
+                                                </div> <!-- full -->
+                                            </div> <!-- col-md-12 -->
+                                        </div> <!-- row -->
+                                    </div> <!-- full progress_bar_inner -->
+                                </div> <!-- white_shd full margin_bottom_30 -->
+                            </div> <!-- col-md-12 -->
+                        </div> <!-- row -->
+                    </div> <!-- container-fluid -->
+                        <!-- footer -->
+                        <!-- footer -->
                         <!-- footer -->
                         <?php include_once('includes/footer.php'); ?>
                     </div>

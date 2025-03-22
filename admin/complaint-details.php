@@ -111,10 +111,10 @@ if (strlen($_SESSION['etmsaid'] == 0)) {
                                              <tr>
                                                 <th>State </th>
                                                 <td><?php echo $row->state; ?></td>
-                                                <th>SubCategory</th>
-                                                <td> <?php echo $row->subcategory; ?></td>
                                                 <th>Complaint Type</th>
                                                 <td><?php echo $row->complaintType; ?>
+                                                <th>Issue Type</th>
+                                                <td><?php echo $row->issuetype; ?>
                                                 </td>
                                              </tr>
                                              <tr>
@@ -163,8 +163,7 @@ if (strlen($_SESSION['etmsaid'] == 0)) {
                                                    <a href="javascript:void(0);"
                                                       onClick="popUpWindow('employee-profile.php?uid=<?php echo htmlentities($row->employeeId); ?>');"
                                                       title="Update order">
-                                                      <button type="button" class="btn btn-primary">View Employee
-                                                         Detials</button></a>
+                                                     
                                                 </td>
 
                                              </tr>

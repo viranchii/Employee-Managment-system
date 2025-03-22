@@ -7,7 +7,7 @@ if (strlen($_SESSION['empid'] == 0)) {
 } else {
 
 
-    ?>
+?>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -89,14 +89,14 @@ if (strlen($_SESSION['empid'] == 0)) {
                                         <div class="table_section padding_infor_info">
                                             <div class="table-responsive-sm">
                                                 <?php
-                                               $lid = isset($_GET['payid']) ? intval($_GET['payid']) : 0;
 
+                                                $lid = $_SESSION['empid'];
 
-                                               $sql = "SELECT tblsalary.*, tblemployee.EmpName 
+                                                $sql = "SELECT tblsalary.*, tblemployee.EmpName 
                                                FROM tblsalary  
                                                INNER JOIN tblemployee ON tblsalary.EmpID = tblemployee.EmpId
                                                WHERE tblsalary.EmpID = :lid ";
-                                       
+
                                                 $query = $dbh->prepare($sql);
                                                 $query->bindParam(':lid', $lid, PDO::PARAM_INT);
                                                 if (!$query->execute()) {
@@ -109,7 +109,7 @@ if (strlen($_SESSION['empid'] == 0)) {
                                                     echo "No salaryid request found with this ID.";
                                                 } else {
                                                     foreach ($results as $result) {
-                                                        ?>
+                                                ?>
                                                         <table class="table table-bordered" style="color:#000">
                                                             <tr>
                                                                 <th colspan="6"
@@ -154,8 +154,7 @@ if (strlen($_SESSION['empid'] == 0)) {
 
 
                                                         </table>
-                                                        <?php $cnt = $cnt + 1;
-
+                                                <?php $cnt = $cnt + 1;
                                                     }
                                                 } ?>
 

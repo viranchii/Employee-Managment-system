@@ -8,10 +8,11 @@ if (strlen($_SESSION['etmsaid']) == 0) {
     exit();
 }
 
-// Check if editid is provided in the URL
+// NEW (if using ?id=...)
 if (!isset($_GET['editid']) || empty($_GET['editid']) || !is_numeric($_GET['editid'])) {
     die("<script>alert('Error: Invalid request.'); window.location.href = 'managesalary.php';</script>");
 }
+$eid = intval($_GET['editid']);
 
 $eid = intval($_GET['editid']);
 $sql = "SELECT * FROM tblsalary WHERE SalaryID = :eid";

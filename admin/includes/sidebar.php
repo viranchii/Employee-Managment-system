@@ -2,9 +2,7 @@
 <nav id="sidebar">
    <div class="sidebar_blog_1">
       <div class="sidebar-header">
-         <div class="logo_section">
-            <a href="dashboard.php"><img class="logo_icon img-responsive" src="images/logo/logo_icon.png" alt="#" /></a>
-         </div>
+        
       </div>
       <div class="sidebar_user_info">
          <div class="icon_setting"></div>
@@ -83,6 +81,15 @@
                <li><a href="inprogress-task.php">> <span>Inprogress Tasks</span></a></li>
                <li><a href="completed-task.php">> <span>Completed Tasks</span></a></li>
                <li><a href="empwise-task.php">> <span>Emp.wise Tasks</span></a></li>
+
+            </ul>
+         </li>
+         <li>
+            <a href="#teams" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="fa-solid fa-people-group" style="color: #63E6BE;"></i>  <span>Team Managment</span></a>
+            <ul class="collapse list-unstyled" id="teams">
+               <li><a href="add-team.php">> <span>Add Team</span></a></li>
+               <li><a href="manage-team.php">> <span>Manage Team</span></a></li>
 
             </ul>
          </li>

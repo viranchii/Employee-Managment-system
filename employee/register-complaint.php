@@ -126,7 +126,7 @@ if (strlen($_SESSION['empid'] == 0)) {
                                 <div class="white_shd full margin_bottom_30">
                                     <div class="full graph_head">
                                         <div class="heading1 margin_0">
-                                            <h5>Apply for leaves</h5>
+                                            <h5>Register Complaints</h5>
                                         </div>
                                     </div>
                                     <div class="full progress_bar_inner">

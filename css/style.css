@@ -2794,25 +2794,6 @@ h2.typoh2 {
 	width: 65%;
 }
 
-.contact-form input[type="text"],
-.contact-form input[type="email"],
-.contact-form textarea {
-	font-size: 15px;
-	letter-spacing: 1px;
-	color: #fff;
-	padding: 0.5em 1em;
-	border: 0;
-	width: 100%;
-	border-bottom: 1px solid #dcdcdc;
-	background: none;
-	-webkit-appearance: none;
-	outline: none;
-	border-radius: 00px 30px 30px 0px;
-	-webkit-border-radius: 00px 30px 30px 0px;
-	-moz-border-radius: 00px 30px 30px 0px;
-	-moz-border-radius: 00px 30px 30px 0px;
-	-ms-border-radius: 00px 30px 30px 0px;
-}
 
 .contact-form input[type="submit"] {
 	border: none;
@@ -3943,3 +3924,8 @@ ul.social-icons3.two li a {
 
 
 /*--//responsive--*/
+
+
+
+
+

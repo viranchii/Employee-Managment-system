@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $stmt->execute();
 
-            header("Location:http://localhost/PHP/ETMS-MAIN/faq-management-system/");
+            header("Location:Location: http://localhost/EMS/EMS_MAIN/faq-management-system/");
 
             exit();
         } catch (PDOException $e) {
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "
             <script>
                 alert('Please fill in all fields!');
-                window.location.href = 'http://localhost/PHP/ETMS-MAIN/faq-management-system/';
+                window.location.href = 'Location: http://localhost/EMS/EMS_MAIN/faq-management-system/';
             </script>
         ";
     }

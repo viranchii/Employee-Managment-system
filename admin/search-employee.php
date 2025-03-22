@@ -46,6 +46,9 @@ $query->execute();
       <link rel="stylesheet" href="css/jquery.fancybox.css" />
         <!--sweetalert-->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="css\materialPreloader.min.css" rel="stylesheet">
+        <link href="css/jquery.dataTables.min.css" rel="stylesheet">
    </head>
    <body class="inner_page tables_page">
       <div class="full_container">
@@ -63,7 +66,7 @@ $query->execute();
                      <div class="row column_title">
                         <div class="col-md-12">
                            <div class="page_title">
-                              <h2>Manage Employee</h2>
+                              <h2>Search Employee</h2>
                            </div>
                         </div>
                      </div>
@@ -132,8 +135,9 @@ foreach($results as $row)
                                              <td><?php  echo htmlentities($row->EmpEmail);?></td>
                                              <td><?php  echo htmlentities($row->EmpContactNumber);?></td>
                                              <td><?php  echo htmlentities($row->EmpDateofjoining);?></td>
-                                             <td width="200"><a href="edit-employee.php?editid=<?php echo htmlentities ($row->eid);?>" class="btn btn-primary btn-sm">View</a>
-                                                <a href="manage-employee.php?delid=<?php echo ($row->eid);?>" onclick="return confirm('Do you really want to Delete ?');" class="btn btn-danger btn-sm">Delete</a></td>
+                                             <td width="200"><a href="edit-employee.php?editid=<?php echo htmlentities ($row->eid);?>" ><i
+                                             class="material-icons green_color">mode_edit</i></a>
+                                                <a href="manage-employee.php?delid=<?php echo ($row->eid);?>" onclick="return confirm('Do you really want to Delete ?');" ><i class="material-icons red_color">delete_forever</i></a></td>
                                           </tr>
                                           <?php 
 $cnt=$cnt+1;

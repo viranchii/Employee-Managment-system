@@ -113,9 +113,14 @@ $cnt = 1;
                                                                 </td>
                                                                 <td><?php echo htmlentities($row->PaymentDate); ?></td>
                                                                 <td>
-    <a href="download_salary_slip.php?salary_id=<?php echo $row->SalaryID; ?>" class="btn btn-outline-success btn-sm">
-    <i  class="material-icons green_color">download</i>
-    </a>
+    <?php if (strtolower($row->PaymentStatus) == "paid"): ?>
+        <a href="download_salary_slip.php?salary_id=<?php echo $row->SalaryID; ?>" class="btn btn-outline-success btn-sm">
+            <i class="material-icons green_color">download</i>
+        </a>
+    <?php else: ?>
+        <a class="btn btn-outline-warning btn-sm"> <i class="material-icons yellow_color" >hourglass_top</i></a>
+       
+    <?php endif; ?>
 </td>
                                                             </tr>
                                                     <?php $cnt++;

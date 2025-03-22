@@ -126,12 +126,20 @@ if (isset($_SESSION['updateSuccess'])) {
 
                         <!-- Leave Form -->
                         <div class="row">
-                            <div class="col-sm-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h5>Edit Leave Details</h5>
+                            <div class="col-md-12">
+                                <div class="white_shd full margin_bottom_30">
+                                    <div class="full graph_head">
+                                        <div class="heading1 margin_0">
+                                            <h5>Update Leave-Details</h5>
+                                        </div>
                                     </div>
-                                    <div class="card-body">
+                                    <div class="full progress_bar_inner">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="full">
+                                                    <div class="padding_infor_info">
+                                                        <div class="alert alert-primary" role="alert">
+                                                   
                                         <form method="post">
                                             <div class="form-group">
                                                 <label for="leavetype">Leave Type</label>
@@ -171,13 +179,19 @@ if (isset($_SESSION['updateSuccess'])) {
 
                                             <button type="submit" class="btn btn-primary" name="update">Update</button>
                                         </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Footer -->
+                                        </div> <!-- alert alert-primary -->
+                                                    </div> <!-- padding_infor_info -->
+                                                </div> <!-- full -->
+                                            </div> <!-- col-md-12 -->
+                                        </div> <!-- row -->
+                                    </div> <!-- full progress_bar_inner -->
+                                </div> <!-- white_shd full margin_bottom_30 -->
+                            </div> <!-- col-md-12 -->
+                        </div> <!-- row -->
+                    </div> <!-- container-fluid -->
+                        <!-- footer -->
+                        <!-- footer -->
+                        <!-- footer -->
                     <?php include_once('includes/footer.php'); ?>
                 </div>
             </div>

@@ -71,8 +71,7 @@ if (strlen($_SESSION['etmsaid'] == 0)) {
 // Fetch all employee bank details
 $sql = "SELECT e.EmpId, e.EmpName, b.BankName, b.AccountNumber, b.IFSC, b.Branch 
         FROM tblemployee e
-        JOIN tblbankdetails b ON e.EmpId = b.EmpID 
-        ORDER BY e.EmpName ASC";
+        JOIN tblbankdetails b ON e.EmpId = b.EmpID  ";
 
 $query = $dbh->prepare($sql);
 $query->execute();

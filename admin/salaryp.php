@@ -70,6 +70,7 @@ if (strlen($_SESSION['etmsaid']) == 0) {
     <link href="css/jquery.dataTables.min.css" rel="stylesheet">
       <!--sweetalert-->
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
 </head>
 
 <body class="inner_page tables_page">
@@ -174,6 +175,9 @@ if (strlen($_SESSION['etmsaid']) == 0) {
                                                                         <input type="number" step="0.01" name="deductions" class="form-control">
                                                                     </div>
 
+                                                                    <div>
+
+                                                                    </div>
                                                                     <br>
 
                                                                     <button type="submit" name="submit" class="btn btn-primary">Submit</button>

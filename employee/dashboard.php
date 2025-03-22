@@ -132,32 +132,61 @@ if (strlen($_SESSION['etmsempid'] == 0)) {
 
 
 
+
+                        <div class="col-md-6 col-lg-6">
+                           <div class="full counter_section margin_bottom_30 red_bg">
+                              <div class="couter_icon">
+                                 <div>
+                                 <i class="fa-solid fa-person-walking-arrow-right" ></i>
+                                 </div>
+                              </div>
+                              <div class="counter_no">
+                                 <?php
+                                 $eid = $_SESSION['empid'];
+                                 $sql2 = "SELECT * from  tblleaves where empid=:eid";
+                                 $query2 = $dbh->prepare($sql2);
+                                 $query2->bindParam(':eid', $eid, PDO::PARAM_STR);
+                                 $query2->execute();
+                                 $results2 = $query2->fetchAll(PDO::FETCH_OBJ);
+                                 $leave = $query2->rowCount();
+                                 ?>
+                                 <div>
+                                    <a href="new-task.php">
+                                       <p class="total_no"><?php echo htmlentities($leave); ?></p>
+                                       <p class="head_couter" style="color:#000">All Leaves</p>
+                                    </a>
+
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+         
+
                         <div class="col-md-6 col-lg-6">
                            <div class="full counter_section margin_bottom_30 blue1_bg">
                               <div class="couter_icon">
                                  <div>
-                                 <i class="fa fa-file white_color"></i>
+                                 <i class="fa-solid fa-circle-exclamation" ></i>
                                  </div>
                               </div>
                               <div class="counter_no">
                                  <div>
                                     <?php
-                                    $sql5 = "SELECT * from  tbltask where  AssignTaskto=:eid";
+                                      $eid = $_SESSION['empid'];
+                                    $sql5 = "SELECT * from  tblcomplaints where  employeeId=:eid";
                                     $query5 = $dbh->prepare($sql5);
                                     $query5->bindParam(':eid', $eid, PDO::PARAM_STR);
                                     $query5->execute();
                                     $results5 = $query5->fetchAll(PDO::FETCH_OBJ);
-                                    $alltasks = $query5->rowCount();
+                                    $complaint = $query5->rowCount();
                                     ?><a href="all-task.php">
-                                       <p class="total_no"><?php echo htmlentities($alltasks); ?></p>
-                                       <p class="head_couter" style="color:#000">All Tasks </p>
+                                       <p class="total_no"><?php echo htmlentities($complaint); ?></p>
+                                       <p class="head_couter" style="color:#000">All Complaints </p>
                                     </a>
                                  </div>
                               </div>
                            </div>
                         </div>
-
-
 
                      </div>
 

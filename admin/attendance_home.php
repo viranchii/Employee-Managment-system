@@ -115,6 +115,8 @@ if (strlen($_SESSION['etmsaid']) == 0) {
         });
     }
         </script>
+
+        
     </head>
 
     <body>
@@ -171,7 +173,7 @@ if (isset($_SESSION['update_message'])) {
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $stmt = $dbh->prepare("SELECT * FROM empattendance ORDER BY id DESC");
+                                            $stmt = $dbh->prepare("SELECT * FROM empattendance ORDER BY id ");
                                             $stmt->execute();
                                             $result = $stmt->fetchAll();
 

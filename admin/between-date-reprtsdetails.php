@@ -46,6 +46,9 @@ $query->execute();
       <link rel="stylesheet" href="css/jquery.fancybox.css" />
         <!--sweetalert-->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="css\materialPreloader.min.css" rel="stylesheet">
+        <link href="css/jquery.dataTables.min.css" rel="stylesheet">
    </head>
    <body class="inner_page tables_page">
       <div class="full_container">
@@ -117,8 +120,9 @@ foreach($results as $row)
                                              <td><?php  echo htmlentities($row->EmpName);?>(<?php  echo htmlentities($row->EmpId);?>)</td>
                                              <td><?php  echo htmlentities($row->TaskAssigndate);?></td>
                                              <td><?php  echo htmlentities($row->TaskEnddate);?></td>
-                                             <td><a href="edit-task.php?editid=<?php echo htmlentities ($row->tid);?>" class="btn btn-primary">Edit</a>
-                                                 <a href="manage-task.php?delid=<?php echo ($row->tid);?>" onclick="return confirm('Do you really want to Delete ?');" class="btn btn-danger">Delete</a></td>
+                                             <td><a href="edit-task.php?editid=<?php echo htmlentities ($row->tid);?>" ><i
+                                             class="material-icons green_color">mode_edit</i></a>
+                                                 <a href="manage-task.php?delid=<?php echo ($row->tid);?>" onclick="return confirm('Do you really want to Delete ?');"><i class="material-icons red_color">delete_forever</i></a></td>
                                           </tr> <?php 
 $cnt=$cnt+1;
 } } else { ?>

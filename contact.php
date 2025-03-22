@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('includes/dbconnection.php'); // Include your database connection file
+include('includes/dbconnection.php'); // Your DB connection
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $first_name = trim($_POST['first_name']);
@@ -9,27 +9,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phone = trim($_POST['phone']);
     $message = trim($_POST['message']);
 
-    // Validate inputs
     if (empty($first_name) || empty($last_name) || empty($email) || empty($phone) || empty($message)) {
-        $_SESSION['error'] = "All fields are required.";
+        header("Location: contact.php?error=All fields are required.");
+        exit();
     } else {
-        // Insert into database
-        $sql = "INSERT INTO contact_form (first_name, last_name, email, phone, message) VALUES (:first_name, :last_name, :email, :phone, :message)";
+        $sql = "INSERT INTO contact_form (first_name, last_name, email, phone, message) 
+                VALUES (:first_name, :last_name, :email, :phone, :message)";
         $query = $dbh->prepare($sql);
-        $query->bindParam(':first_name', $first_name, PDO::PARAM_STR);
-        $query->bindParam(':last_name', $last_name, PDO::PARAM_STR);
-        $query->bindParam(':email', $email, PDO::PARAM_STR);
-        $query->bindParam(':phone', $phone, PDO::PARAM_STR);
-        $query->bindParam(':message', $message, PDO::PARAM_STR);
+        $query->bindParam(':first_name', $first_name);
+        $query->bindParam(':last_name', $last_name);
+        $query->bindParam(':email', $email);
+        $query->bindParam(':phone', $phone);
+        $query->bindParam(':message', $message);
 
         if ($query->execute()) {
-            $_SESSION['msg'] = "Your message has been sent successfully!";
+            header("Location: contact.php?success=Your message has been sent successfully!");
+            exit();
         } else {
-            $_SESSION['error'] = "Something went wrong. Please try again.";
+            header("Location: contact.php?error=Something went wrong. Please try again.");
+            exit();
         }
     }
-    header("Location: contact.php");
-    exit();
 }
 ?>
 
@@ -40,17 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
 	<title>Employee Task Management System||Contact Page</title>
 	
-	<script type="application/x-javascript">
-		addEventListener("load", function () {
-			setTimeout(hideURLbar, 0);
-		}, false);
-
-		function hideURLbar() {
-			window.scrollTo(0, 1);
-		}
-	</script>
-	<!-- SweetAlert2 CSS & JS -->
-
+	
 
 	<!--//tags -->
 	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
@@ -66,30 +56,112 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Fontawesome icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	
 
+<style>
+  .contact-form1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  margin-top: 50px;
+  flex-wrap: wrap;
+}
+
+.contact-form1 form {
+  flex: 1;
+  min-width: 300px;
+  margin-top: 100px;
+}
+
+.contact-form1 .form-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.contact-form1 .form-row input {
+  flex: 1;
+}
+
+.contact-form1 input[type="text"],
+.contact-form1 input[type="email"],
+.contact-form1 textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.contact-form1 .send-btn {
+  padding: 10px 20px;
+  background-color: #3085d6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.contact-form1 > div:last-child {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-form1 img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .contact-form1 {
+    flex-direction: column;
+  }
+  .contact-form1 .form-row {
+    flex-direction: column;
+  }
+}
+
+</style>
+<script type="application/x-javascript">
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	</script>
+	<!-- SweetAlert2 CSS & JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    // Display SweetAlert messages based on session data
-    <?php if (isset($_SESSION['msg'])) { ?>
-        Swal.fire({
-            icon: 'success',
-            title: 'Success!',
-            text: '<?php echo $_SESSION["msg"]; ?>',
-            confirmButtonColor: '#3085d6'
-        });
-        <?php unset($_SESSION['msg']); ?>
-    <?php } ?>
+    document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const successMsg = urlParams.get('success');
+        const errorMsg = urlParams.get('error');
 
-    <?php if (isset($_SESSION['error'])) { ?>
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: '<?php echo $_SESSION["error"]; ?>',
-            confirmButtonColor: '#d33'
-        });
-        <?php unset($_SESSION['error']); ?>
-    <?php } ?>
+        if (successMsg) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: successMsg,
+                confirmButtonColor: '#3085d6'
+            });
+        } else if (errorMsg) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: errorMsg,
+                confirmButtonColor: '#d33'
+            });
+        }
+    });
 </script>
+
 
 </head>
 
@@ -138,13 +210,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          </div>
        </div>
 
-       <div class = "contact-form">
-	   <form  method="POST">
-    <div class="form-group">
+       <div class = "contact-form1" >
+       
+       <form method="POST">
+    <div class="form-row">
         <input type="text" class="form-control" name="first_name" placeholder="First Name" required>
         <input type="text" class="form-control" name="last_name" placeholder="Last Name" required>
     </div>
-    <div>
+    <div class="form-row">
         <input type="email" class="form-control" name="email" placeholder="E-mail" required>
         <input type="text" class="form-control" name="phone" placeholder="Phone" required>
     </div>

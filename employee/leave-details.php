@@ -101,17 +101,14 @@ if (!isset($_SESSION['empid']) || strlen($_SESSION['empid']) == 0) {
                                         <div class="table_section padding_infor_info">
                                             <div class="table-responsive-sm">
                                                 <?php
-                                               $lid = intval($_GET['leaveid']);
+                                              // $lid = $_GET['leaveid'];
+                                               $lid = $_SESSION['empid'];
 
-                                               $sql = "SELECT tblleaves.id as lid, tblemployee.EmpName, tblemployee.EmpId, 
-                                                       tblemployee.ID, tblemployee.EmpContactNumber, tblemployee.EmpEmail, 
-                                                       -- tblemployee.Phonenumber,
-                                                       tblleaves.LeaveType, tblleaves.ToDate, tblleaves.FromDate, 
-                                                       tblleaves.Description, tblleaves.PostingDate, tblleaves.Status, 
-                                                       tblleaves.AdminRemark, tblleaves.AdminRemarkDate 
-                                                       FROM tblleaves 
-                                                       JOIN tblemployee ON tblleaves.empid = tblemployee.EmpId 
-                                                       WHERE tblleaves.id = :lid";
+                                               $sql = "SELECT tblleaves.*, tblemployee.EmpName, tblemployee.EmpId, 
+                                               tblemployee.ID, tblemployee.EmpContactNumber, tblemployee.EmpEmail
+                                               FROM tblleaves 
+                                               JOIN tblemployee ON tblleaves.empid = tblemployee.EmpId 
+                                               WHERE tblleaves.empid = :lid";
 
                                                 $query = $dbh->prepare($sql);
                                                 $query->bindParam(':lid', $lid, PDO::PARAM_INT);

@@ -21,7 +21,7 @@
         }
 
         body{
-            background-color: #4fb6ff;
+            background-color:rgb(102, 102, 102);
         }
 
         .container{
@@ -83,7 +83,7 @@
         }
     </style>
 </head>
-<body>
+<body style="background-color: rgb(102, 102, 102);">
 
 
 
@@ -99,7 +99,7 @@
         <?php 
             include("./conn/conn.php");
         
-            $stmt = $conn->prepare("SELECT * FROM tbl_faq");
+            $stmt = $dbh->prepare("SELECT * FROM tbl_faq");
             $stmt->execute();
 
             $result = $stmt->fetchAll();

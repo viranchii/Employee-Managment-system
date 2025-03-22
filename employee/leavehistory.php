@@ -141,7 +141,7 @@ if (!isset($_SESSION['empid']) || strlen($_SESSION['empid']) == 0) {
                                                                     <a href="edit-leave.php?id=<?php echo $result->lid; ?>" ><i  class="material-icons green_color">mode_edit</i></a>
                                                                     <a href="javascript:void(0);"  onclick="confirmDelete(<?php echo $result->lid; ?>)"><i  class="material-icons red_color">delete_forever</i></a>
 
-                                                                    <a href="leave-details.php?leaveid=<?php echo htmlentities($result->id); ?>"
+                                                                    <a href="leave-details.php?leaveid=<?php echo htmlentities($result->lid); ?>"
                                                                     > <i  class="material-icons yellow_color">visibility</i></a>
                                                                     </td>
 

@@ -29,6 +29,83 @@ include('includes/dbconnection.php');
 	<link href="//fonts.googleapis.com/css?family=Work+Sans:200,300,400,500,600,700" rel="stylesheet">
 	<link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic'
 	    rel='stylesheet' type='text/css'>
+
+		<style>
+    .our-members {
+        background: linear-gradient(135deg, #f0f4ff, #ffffff);
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+
+    .section-title {
+        font-size: 36px;
+        font-weight: bold;
+        color: #2c3e50;
+        position: relative;
+    }
+
+    .section-title::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 4px;
+        background: #007bff;
+        margin: 10px auto 0;
+        border-radius: 2px;
+    }
+
+    .member-card {
+        background: #ffffff;
+        border-radius: 15px;
+        padding: 20px 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+		margin-top: 20px;
+    }
+
+    .member-card:hover {
+        transform: translateY(-10px);
+    }
+
+    .profile-image-wrapper {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 4px solid #007bff;
+    }
+
+    .profile-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+	.member-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.member-designation {
+    font-size: 16px;
+    font-weight: 500;
+    color: #6c757d;
+    margin-top: -5px;
+    font-style: italic;
+    letter-spacing: 0.5px;
+}
+
+
+    @media (max-width: 767px) {
+        .section-title {
+            font-size: 28px;
+        }
+    }
+</style>
 </head>
 
 <body>
@@ -132,6 +209,39 @@ foreach($results as $row)
 
 		</div>
 	</div>
+
+	<!--team member-->
+	<?php
+include('includes/dbconnection.php');
+
+// Fetch all employees
+$sql = "SELECT EmpName, ProfilePic,Designation FROM tblemployee";
+$query = $dbh->prepare($sql);
+$query->execute();
+$members = $query->fetchAll(PDO::FETCH_OBJ);
+?>
+
+<section class="our-members py-5">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Meet Our Members</h2><br>
+        <div class="row justify-content-center">
+            <?php foreach ($members as $member) { ?>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="member-card text-center">
+                        <div class="profile-image-wrapper">
+                            <img src="admin/images/<?php echo !empty($member->ProfilePic) ? htmlentities($member->ProfilePic) : 'default.jpg'; ?>" 
+                                 alt="<?php echo htmlentities($member->EmpName); ?>" 
+                                 class="profile-image">
+                        </div><br>
+						<h3 class="member-name mt-3"><?php echo htmlentities($member->EmpName); ?></h3>
+<h5 class="member-designation mt-3"><?php echo htmlentities($member->Designation); ?></h5>
+</div>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+</section>
+
 	<!-- //banner-bottom -->
 	<div class="team_work_agile">
 		<h4>Whether we play a large or small role, by working together we achieve our objectives.</h4>
