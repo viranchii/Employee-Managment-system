@@ -20,3 +20,4 @@ A simple and responsive **Employee Management System** built using **PHP & MySQL
 ## 🛠️ Tech Stack
 
 - **Frontend**: HTML, CSS, Bootstrap
+- - **Backend**: PHP & MYSQL
