@@ -98,4 +98,25 @@ if (!empty($_POST["empjoiningdate"]) && !empty($_POST["empdob"])) {
     } else {
         echo "<span style='color:green'> Joining Date is valid.</span>";
     }
+
 }
+// Password Validation
+if (!empty($_POST["password"])) {
+    $password = trim($_POST["password"]); // Trim whitespace
+
+    // Check password strength
+    if (strlen($password) < 8) {
+        echo "<span style='color:red'> Password must be at least 8 characters long.</span>";
+    } elseif (!preg_match("/[A-Z]/", $password)) {
+        echo "<span style='color:red'> Password must include at least one uppercase letter.</span>";
+    } elseif (!preg_match("/[a-z]/", $password)) {
+        echo "<span style='color:red'> Password must include at least one lowercase letter.</span>";
+    } elseif (!preg_match("/[0-9]/", $password)) {
+        echo "<span style='color:red'> Password must include at least one number.</span>";
+    } elseif (!preg_match("/[\W]/", $password)) { // \W matches any non-word character
+        echo "<span style='color:red'> Password must include at least one special character (e.g., @, #, $, etc.).</span>";
+    } else {
+        echo "<span style='color:green'> Password is strong.</span>";
+    }
+}
+

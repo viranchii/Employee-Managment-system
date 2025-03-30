@@ -154,7 +154,7 @@ if (strlen($_SESSION['etmsaid'] == 0)) {
 
                                                    } else { ?>
                                                       <a href="javascript:void(0);"
-                                                         onClick="popUpWindow('updatecomplaint.php?cid=<?php echo htmlentities($row->complaintNumber); ?>');"
+                                                         onClick="popUpWindow('update-complaint.php?cid=<?php echo htmlentities($row->complaintNumber); ?>');"
                                                          title="Update order">
                                                          <button type="button" class="btn btn-primary">Take Action</button>
                                                    </td>

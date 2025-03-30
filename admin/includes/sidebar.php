@@ -143,7 +143,7 @@
             <a href="#element1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
             <i class="fa fa-dollar-sign red_color"></i> <span>Salary</span></a>
             <ul class="collapse list-unstyled" id="element1">
-               <li><a href="salaryp.php">> <span>Add Salary</span></a></li>
+               <li><a href="add-salary.php">> <span>Add Salary</span></a></li>
                <li><a href="managesalary.php">> <span>Manage Salary</span></a></li>
                <li><a href="salary-history.php">> <span>Salary History</span></a></li>
                

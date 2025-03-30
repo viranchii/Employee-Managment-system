@@ -112,7 +112,8 @@ if (strlen($_SESSION['etmsaid'] == 0)) {
       <link rel="stylesheet" href="css/responsive.css" />
       <!-- color css -->
       <link rel="stylesheet" href="css/colors.css" />
-      <!-- select bootstrap -->
+      <!-- select bootstrap --> 
+<!-- Enhances <select> dropdowns (e.g., search inside dropdowns, multi-select).-->
       <link rel="stylesheet" href="css/bootstrap-select.css" />
       <!-- scrollbar css -->
       <link rel="stylesheet" href="css/perfect-scrollbar.css" />
@@ -197,6 +198,22 @@ function checkJoiningDateAvailability() {
                error: function () { }
             });
          }
+
+
+         function checkPasswordAvailability() {
+    $("#loaderIcon").show();
+    jQuery.ajax({
+        url: "check_availability.php",
+        data: 'password=' + $("#password").val(), // Change object format to string format
+        type: "POST",
+        success: function (data) {
+            $("#password-error").html(data);
+            $("#loaderIcon").hide();
+        },
+        error: function () {}
+    });
+}
+
       </script>
    </head>
 
@@ -396,8 +413,9 @@ if (isset($_SESSION['alert'])) {
                                                       <br>
                                                       <div class="field">
                                                          <label class="label_field">Password</label>
-                                                         <input type="text" name="password" value="" class="form-control"
-                                                            required='true'>
+                                                         <input type="password" name="password" id="password" class="form-control"
+                                                         onBlur="checkPasswordAvailability()" required>
+                                                            <span id="password-error" ></span>
                                                       </div>
                                                       <br>
                                                       <div class="field">
@@ -440,25 +458,25 @@ if (isset($_SESSION['alert'])) {
          <script src="js/jquery.min.js"></script>
          <script src="js/popper.min.js"></script>
          <script src="js/bootstrap.min.js"></script>
-         <!-- wow animation -->
+         //<!-- wow animation -->
          <script src="js/animate.js"></script>
-         <!-- select country -->
+         //<!-- select country -->
          <script src="js/bootstrap-select.js"></script>
-         <!-- owl carousel -->
+        // <!-- owl carousel -->
          <script src="js/owl.carousel.js"></script>
-         <!-- chart js -->
+       //  <!-- chart js -->
          <script src="js/Chart.min.js"></script>
          <script src="js/Chart.bundle.min.js"></script>
          <script src="js/utils.js"></script>
          <script src="js/analyser.js"></script>
-         <!-- nice scrollbar -->
+         //<!-- nice scrollbar -->
          <script src="js/perfect-scrollbar.min.js"></script>
          <script>
             var ps = new PerfectScrollbar('#sidebar');
          </script>
-         <!-- custom js -->
+         //<!--custom js-->
          <script src="js/custom.js"></script>
-         <!-- calendar file css -->
+         //<!-- calendar file css -->
          <script src="js/semantic.min.js"></script>
          
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -467,4 +485,4 @@ if (isset($_SESSION['alert'])) {
    </html>
    <?php
 }
-?>
+?>    

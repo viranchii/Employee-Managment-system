@@ -87,7 +87,7 @@
                <li>
                   <a href="paid-salary.php">> <span>Paid Salary</span></a>
                </li>
-               <li><a href="salary.php">> <span>Salary Slip</span></a></li>
+               <li><a href="salary-slip.php">> <span>Salary Slip</span></a></li>
             </ul>
          </li>
 
@@ -95,7 +95,7 @@
             <a href="#dashboard7" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"> <i class="fa-solid fa-people-group" style="color: #63E6BE;"></i> <span>Team Managment</span></a>
             <ul class="collapse list-unstyled" id="dashboard7">
                <li>
-                  <a href="teamdetails.php">> <span>Team details</span></a>
+                  <a href="team-details.php">> <span>Team details</span></a>
                </li>
             </ul>
          </li>

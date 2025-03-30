@@ -334,16 +334,7 @@ if (strlen($_SESSION['empid'] == 0)) {
                const apiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(text)}`;
 
                qrImg.src = apiUrl;
-               // document.getElementById('studentName').style.pointerEvents = 'none';
-               // document.getElementById('studentCourse').style.pointerEvents = 'none';
-
-               // const modalClose = document.querySelector('.modal-close');
-               // const qrCon = document.querySelector('.qr-con');
-               // const qrGenerator = document.querySelector('.qr-generator');
-
-               // if (modalClose) modalClose.style.display = '';
-               // if (qrCon) qrCon.style.display = '';
-               // if (qrGenerator) qrGenerator.style.display = 'none';
+              
             }
 
 
