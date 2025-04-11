@@ -29,7 +29,10 @@ $query=$dbh->prepare($sql);
 $query->bindParam(':pic',$pic,PDO::PARAM_STR);
 $query->bindParam(':eid',$eid,PDO::PARAM_STR);
  $query->execute();
-  echo '<script>alert("Employee profile pic has been updated")</script>';
+ echo '<script>
+ alert("Employee profile pic has been updated");
+ window.location.href = "manage-employee.php";
+</script>';
 }
 }
 

@@ -33,8 +33,22 @@
             <div class="icon_info">
                <ul>
                   <?php 
-                     $sql2 ="SELECT * from tbltask where Status is null";
+                   $eid1 = $_SESSION['empid'];
+                   $sql2 = "SELECT 
+                   e.EmpId As empid,
+                   e.EmpName,
+                   e.DepartmentID,
+                   t.ID,
+                   t.TaskTitle
+                FROM 
+                   tblemployee e
+                JOIN 
+                   tbltask t ON e.DepartmentID = t.DeptId
+                WHERE 
+                   e.EmpId = :eid1 AND t.Status IS NULL"; // Only that employee & new tasks
+       
                      $query2 = $dbh->prepare($sql2);
+                     $query2->bindParam(':eid1', $eid1, PDO::PARAM_STR); 
                      $query2->execute();
                      $newtask = $query2->rowCount();
                   ?>

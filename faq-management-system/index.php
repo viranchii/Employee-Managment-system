@@ -102,6 +102,8 @@
             $stmt = $dbh->prepare("SELECT * FROM tbl_faq");
             $stmt->execute();
 
+
+            
             $result = $stmt->fetchAll();
 
             foreach($result as $row) {

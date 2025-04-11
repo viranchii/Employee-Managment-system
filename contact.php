@@ -221,7 +221,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="email" class="form-control" name="email" placeholder="E-mail" required>
         <input type="text" class="form-control" name="phone" placeholder="Phone" required>
     </div>
-    <textarea rows="5" name="message" placeholder="Message" class="form-control" required></textarea>
+    <textarea rows="5" name="message" placeholder="Message" class="form-control" required></textarea><br>
+
     <input type="submit" class="send-btn" value="Send Message">
 </form>
 
@@ -273,7 +274,7 @@ foreach($results as $row)
 							<div class="clearfix"> </div>
 						</div>
 						<div class="mail-agileits-w3layouts">
-							<i class="fa fa-envelope-o" aria-hidden="true"></i>
+							<i class = "fas fa-envelope-open"></i>
 							<div class="contact-right">
 								<p>Mail </p><a href="mailto:info@example.com"><?php  echo htmlentities($row->Email);?></a>
 							</div>
@@ -289,7 +290,7 @@ foreach($results as $row)
 						<div class="agileits_w3layouts_nav_right contact">
 							<div class="social two">
 								<ul>
-									<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+									<li ><a href="#"><i class="fa fa-facebook"></i></a></li>
 									<li><a href="#"><i class="fa fa-twitter"></i></a></li>
 									<li><a href="#"><i class="fa fa-rss"></i></a></li>
 								</ul>

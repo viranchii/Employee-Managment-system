@@ -66,9 +66,7 @@ if (!empty($_POST["empcontno"])) {
         }
     }
 }
-
-//date
-if (!empty($_POST["empdob"])) {
+if (isset($_POST["type"]) && $_POST["type"] == "dob") {
     $empdob = $_POST["empdob"];
     $today = date("Y-m-d");
     $minAge = date("Y-m-d", strtotime("-18 years"));
@@ -84,7 +82,7 @@ if (!empty($_POST["empdob"])) {
     }
 }
 
-if (!empty($_POST["empjoiningdate"]) && !empty($_POST["empdob"])) {
+if (isset($_POST["type"]) && $_POST["type"] == "doj") {
     $empdob = $_POST["empdob"];
     $empjoiningdate = $_POST["empjoiningdate"];
     $today = date("Y-m-d");
@@ -98,8 +96,8 @@ if (!empty($_POST["empjoiningdate"]) && !empty($_POST["empdob"])) {
     } else {
         echo "<span style='color:green'> Joining Date is valid.</span>";
     }
-
 }
+
 // Password Validation
 if (!empty($_POST["password"])) {
     $password = trim($_POST["password"]); // Trim whitespace

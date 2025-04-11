@@ -16,14 +16,14 @@ if (isset($_GET['faq'])) {
             echo "
                 <script>
                     alert('FAQ deleted successfully!');
-                    window.location.href = 'Location: http://localhost/EMS/EMS_MAIN/faq-management-system/';
+                    window.location.href = 'http://localhost/EMS/EMS_MAIN/faq-management-system/';
                 </script>
             ";
         } else {
             echo "
                 <script>
                     alert('Failed to delete faq!');
-                    window.location.href = 'Location: http://localhost/EMS/EMS_MAIN/faq-management-system/';
+                    window.location.href = ' http://localhost/EMS/EMS_MAIN/faq-management-system/';
                 </script>
             ";
         }

@@ -1,11 +1,16 @@
 <?php
 session_start();
-error_reporting(0);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 include('includes/dbconnection.php');
-if (strlen($_SESSION['empid'] == 0)) {
+
+// Session check
+if (!isset($_SESSION['empid']) || strlen($_SESSION['empid']) == 0) {
     header('location:logout.php');
 } else {
-    date_default_timezone_set('Asia/Kolkata');// change according timezone
+    date_default_timezone_set('Asia/Kolkata');
     $currentTime = date('d-m-Y h:i:s A', time());
 
     if (isset($_POST['submit'])) {
@@ -16,61 +21,74 @@ if (strlen($_SESSION['empid'] == 0)) {
         $state = $_POST['state'];
         $noc = $_POST['noc'];
         $complaintdetials = $_POST['complaindetails'];
+
         $compfile = $_FILES["compfile"]["name"];
-        // get the image extension
-        $extension = substr($compfile, strlen($compfile) - 4, strlen($compfile));
+        $compfilenew = null;
 
-        // allowed extensions
-        $allowed_extensions = array(".jpg", "jpeg", ".png", ".gif", ".pdf", ".PDF", ".doc", "docx");
-        // Validation for allowed extensions .in_array() function searches an array for a specific value.
-        if (!in_array($extension, $allowed_extensions)) {
-            echo "<script>
-            document.addEventListener('DOMContentLoaded', function() {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Invalid File Format!',
-                    text: 'Only jpg, jpeg, png, gif, pdf, doc, and docx formats are allowed.',
-                });
-            });
-        </script>";
-        } else {
-            //rename the image file
-            $compfilenew = md5($compfile) . $extension;
+        if (!empty($compfile)) {
+            // Get extension and validate
+            $extension = strtolower(pathinfo($compfile, PATHINFO_EXTENSION));
+            $allowed_extensions = array("jpg", "jpeg", "png", "gif", "pdf", "doc", "docx");
 
-            // Code for move image into directory
-            move_uploaded_file($_FILES["compfile"]["tmp_name"], "complaintdocs/" . $compfilenew);
+            if (!in_array($extension, $allowed_extensions)) {
+                echo "<script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Invalid File Format!',
+                            text: 'Only jpg, jpeg, png, gif, pdf, doc, and docx formats are allowed.',
+                        });
+                    });
+                </script>";
+                exit();
+            } else {
+                // Rename file
+                $compfilenew = md5($compfile . time()) . '.' . $extension;
 
-            $query = "insert into tblcomplaints(employeeId,department,issuetype,complaintType,state,noc,complaintDetails,complaintFile) values('$uid','$category','$issuetype','$complaintype','$state','$noc','$complaintdetials','$compfilenew')";
-            $query = $dbh->prepare( $query);
-
-            $query->execute();
-            // code for show complaint number
-            $sql = "select complaintNumber from tblcomplaints  order by complaintNumber desc limit 1";
-            $query = $dbh->prepare( $sql);
-
-            $query->execute();
-            $results = $query->fetchAll(PDO::FETCH_OBJ);
-            foreach ($results as $row) {
-                $cmpn = $row->complaintNumber;
+                // Move uploaded file
+                move_uploaded_file($_FILES["compfile"]["tmp_name"], "complaintdocs/" . $compfilenew);
             }
-            $complainno = $cmpn;
-            echo "<script>
+        }
+
+        // Insert complaint with bound parameters
+        $stmt = $dbh->prepare("INSERT INTO tblcomplaints(employeeId, department, issuetype, complaintType, state, noc, complaintDetails, complaintFile) 
+            VALUES (:uid, :category, :issuetype, :complaintype, :state, :noc, :complaintdetials, :compfilenew)");
+
+        $stmt->bindParam(':uid', $uid);
+        $stmt->bindParam(':category', $category);
+        $stmt->bindParam(':issuetype', $issuetype);
+        $stmt->bindParam(':complaintype', $complaintype);
+        $stmt->bindParam(':state', $state);
+        $stmt->bindParam(':noc', $noc);
+        $stmt->bindParam(':complaintdetials', $complaintdetials);
+        $stmt->bindParam(':compfilenew', $compfilenew);
+
+        $stmt->execute();
+
+        // Get last complaint number
+        $sql = "SELECT complaintNumber FROM tblcomplaints ORDER BY complaintNumber DESC LIMIT 1";
+        $query = $dbh->prepare($sql);
+        $query->execute();
+        $result = $query->fetch(PDO::FETCH_OBJ);
+        $complainno = $result->complaintNumber;
+
+        echo "<script>
             document.addEventListener('DOMContentLoaded', function() {
                 Swal.fire({
                     icon: 'success',
                     title: 'Complaint Submitted!',
                     text: 'Your complaint has been successfully registered. Your complaint number is $complainno',
                 }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = 'complaint-history.php';
-                }
-            });
+                    if (result.isConfirmed) {
+                        window.location.href = 'complaint-history.php';
+                    }
+                });
             });
         </script>";
-        }
     }
+}
+?>
 
-    ?>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -250,8 +268,7 @@ if (strlen($_SESSION['empid'] == 0)) {
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label for="exampleInputEmail1">Complaint Related Doc(if
-                                                                any)</label>
+                                                            <label for="exampleInputEmail1">Complaint Related Doc(optional)</label>
                                                             <input type="file" name="compfile" class="form-control"
                                                                 value="">
 
@@ -308,4 +325,4 @@ if (strlen($_SESSION['empid'] == 0)) {
         <script src="js/semantic.min.js"></script>
     </body>
 
-    </html><?php } ?>
+    </html>

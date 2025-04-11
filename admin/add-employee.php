@@ -149,37 +149,38 @@ if (strlen($_SESSION['etmsaid'] == 0)) {
                error: function () { }
             });
          }
-
-         // Function to check Employee Date of Birth (DOB) availability
+// Function to check Employee Date of Birth (DOB)
 function checkDOBAvailability() {
     $("#loaderIcon").show();
     jQuery.ajax({
         url: "check_availability.php",
-        data: 'empdob=' + $("#empdob").val(),
+        data: {
+            type: "dob",
+            empdob: $("#empdob").val()
+        },
         type: "POST",
         success: function (data) {
             $("#empdob-status").html(data);
             $("#loaderIcon").hide();
-        },
-        error: function () { }
+        }
     });
 }
 
-// Function to check Employee Joining Date availability
+// Function to check Joining Date
 function checkJoiningDateAvailability() {
     $("#loaderIcon").show();
     jQuery.ajax({
         url: "check_availability.php",
         data: {
-            'empjoiningdate': $("#empjoiningdate").val(),
-            'empdob': $("#empdob").val() // Send DOB as well to validate joining date
+            type: "doj",
+            empdob: $("#empdob").val(),
+            empjoiningdate: $("#empjoiningdate").val()
         },
         type: "POST",
         success: function (data) {
             $("#empjoiningdate-status").html(data);
             $("#loaderIcon").hide();
-        },
-        error: function () { }
+        }
     });
 }
 
@@ -397,7 +398,7 @@ if (isset($_SESSION['alert'])) {
                                                       <br>
                                                       <div class="field">
     <label class="label_field">Joining Date</label>
-    <input type="date" name="empdoj" id="empdoj" class="form-control" required="true" onBlur="checkJoiningDateAvailability()">
+    <input type="date" name="empdoj" id="empjoiningdate" class="form-control" required="true" onBlur="checkJoiningDateAvailability()">
 </div>
 <span id="empjoiningdate-status"></span>
 

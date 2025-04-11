@@ -43,7 +43,7 @@ if (strlen($_SESSION['etmsaid']) == 0) {
             } else {
                 $_SESSION['message'] = 'Error occurred while adding salary details!';
             }
-            header('location: salaryp.php');
+            header('location: add-salary.php');
             exit();
         }
        

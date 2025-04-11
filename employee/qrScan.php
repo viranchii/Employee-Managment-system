@@ -74,11 +74,12 @@ if (strlen($_SESSION['empid'] == 0)) {
 
                                     <div class="scanner-con">
                                         <h5 class="text-center">Scan you QR Code here for your attedance</h5>
+                            <!--display cammera video-->
                                         <video id="interactive" class="viewport" width="100%">
                                     </div>
                                     <div class="qr-detected-container" style="display: none;">
                                         <form action="add-attendance.php" method="POST">
-                                            <h4 class="text-center">Student QR Detected!</h4>
+                                            <h4 class="text-center">Employee QR Detected!</h4>
                                             <input type="hidden" id="detected-qr-code" name="qr_code">
                                             <button type="submit" class="btn btn-dark form-control">Submit
                                                 Attendance</button>
@@ -162,14 +163,18 @@ if (strlen($_SESSION['empid'] == 0)) {
             function startScanner() {
                 scanner = new Instascan.Scanner({ video: document.getElementById('interactive') });
 
-                scanner.addListener('scan', function (content) {
-                    $("#detected-qr-code").val(content);
-                    console.log(content);
-                    scanner.stop();
-                    document.querySelector(".qr-detected-container").style.display = '';
-                    document.querySelector(".scanner-con").style.display = 'none';
-                });
+                //  This function triggers when a QR code is scanned
+    scanner.addListener('scan', function (content) {
+        $("#detected-qr-code").val(content); //  Puts the scanned content in the input box
+        console.log(content); //  Shows the scanned value in the browser console
+        scanner.stop(); // Stops the camera after scanning
 
+        // 👇 Shows the container that was previously hidden
+        document.querySelector(".qr-detected-container").style.display = '';
+        document.querySelector(".scanner-con").style.display = 'none';
+    });
+
+     //  Access the user's camera
                 Instascan.Camera.getCameras()
                     .then(function (cameras) {
                         if (cameras.length > 0) {
@@ -187,11 +192,11 @@ if (strlen($_SESSION['empid'] == 0)) {
 
             document.addEventListener('DOMContentLoaded', startScanner);
 
-            function deleteAttendance(id) {
-                if (confirm("Do you want to remove this attendance?")) {
-                    window.location = "./endpoint/delete-attendance.php?attendance=" + id;
-                }
-            }
+            // function deleteAttendance(id) {
+            //     if (confirm("Do you want to remove this attendance?")) {
+            //         window.location = "./endpoint/delete-attendance.php?attendance=" + id;
+            //     }
+            // }
         </script>
     </body>
 

@@ -125,7 +125,7 @@ if (isset($_POST['submit'])) {
                         <div class="row column_title">
                             <div class="col-md-12">
                                 <div class="page_title">
-                                    <h2>Add Project</h2>
+                                    <h2>Add Team</h2>
                                 </div>
                             </div>
                         </div>
@@ -136,7 +136,7 @@ if (isset($_POST['submit'])) {
                                 <div class="white_shd full margin_bottom_30">
                                     <div class="full graph_head">
                                         <div class="heading1 margin_0">
-                                            <h2>Add Project</h2>
+                                            <h2>Add Team</h2>
                                         </div>
                                     </div>
                                     <div class="full progress_bar_inner">
