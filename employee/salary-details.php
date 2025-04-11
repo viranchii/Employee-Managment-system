@@ -2,7 +2,8 @@
 session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
-if (strlen($_SESSION['empid'] == 0)) {
+if (!isset($_SESSION['empid']) || strlen($_SESSION['empid']) == 0) {
+
     header('location:logout.php');
 } else {
 
@@ -90,12 +91,12 @@ if (strlen($_SESSION['empid'] == 0)) {
                                             <div class="table-responsive-sm">
                                                 <?php
 
-                                                $lid = $_SESSION['empid'];
-
+                                                //$lid = $_SESSION['empid'];
+                                                $lid = intval($_GET['payid']);
                                                 $sql = "SELECT tblsalary.*, tblemployee.EmpName 
-                                               FROM tblsalary  
-                                               INNER JOIN tblemployee ON tblsalary.EmpID = tblemployee.EmpId
-                                               WHERE tblsalary.EmpID = :lid ";
+                                                        FROM tblsalary  
+                                                        INNER JOIN tblemployee ON tblsalary.EmpID = tblemployee.EmpId
+                                                        WHERE tblsalary.SalaryID = :lid";
 
                                                 $query = $dbh->prepare($sql);
                                                 $query->bindParam(':lid', $lid, PDO::PARAM_INT);
@@ -147,7 +148,7 @@ if (strlen($_SESSION['empid'] == 0)) {
                                                             </tr>
                                                             <tr>
                                                                 <th scope="col">Payment Date</th>
-                                                                <td colspan="2"><?php echo htmlentities($result->created_at); ?>
+                                                                <td colspan="2"><?php echo htmlentities($result->PaymentDate); ?>
                                                                 </td>
                                                             </tr>
 

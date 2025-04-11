@@ -141,7 +141,7 @@ if (strlen($_SESSION['empid'] == 0)) {
                                                                 </td>
                                                                 <td><?php echo htmlentities($row->PaymentDate); ?></td>
                                                                     <td>
-                                                                        <a href="salary-details.php?payid=<?php echo htmlentities($row->EmpID); ?>"
+                                                                        <a href="salary-details.php?payid=<?php echo htmlentities($row->SalaryID); ?>"
                                                                        > <i  class="material-icons yellow_color">visibility</i>
                                                                         </a>
                                                                     </td>

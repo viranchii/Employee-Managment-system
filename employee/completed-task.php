@@ -2,19 +2,20 @@
 session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
-if (strlen($_SESSION['etmsempid']==0)) {
-  header('location:logout.php');
-  } else{
+if (strlen($_SESSION['etmsempid'] == 0)) {
+   header('location:logout.php');
+} else {
 
 
 
-  ?>
-<!DOCTYPE html>
-<html lang="en">
+?>
+   <!DOCTYPE html>
+   <html lang="en">
+
    <head>
-      
+
       <title>Employee Management System || View Completed Task</title>
-   
+
       <link rel="stylesheet" href="css/bootstrap.min.css" />
       <!-- site css -->
       <link rel="stylesheet" href="style.css" />
@@ -33,19 +34,20 @@ if (strlen($_SESSION['etmsempid']==0)) {
       <!-- fancy box js -->
       <link rel="stylesheet" href="css/jquery.fancybox.css" />
       <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="css\materialPreloader.min.css" rel="stylesheet">
-        <link href="css/jquery.dataTables.min.css" rel="stylesheet">
-      
+      <link href="css\materialPreloader.min.css" rel="stylesheet">
+      <link href="css/jquery.dataTables.min.css" rel="stylesheet">
+
    </head>
+
    <body class="inner_page tables_page">
       <div class="full_container">
          <div class="inner_container">
             <!-- Sidebar  -->
-          <?php include_once('includes/sidebar.php');?>
+            <?php include_once('includes/sidebar.php'); ?>
             <!-- right content -->
             <div id="content">
                <!-- topbar -->
-              <?php include_once('includes/header.php');?>
+               <?php include_once('includes/header.php'); ?>
                <!-- end topbar -->
                <!-- dashboard inner -->
                <div class="midde_cont">
@@ -59,8 +61,8 @@ if (strlen($_SESSION['etmsempid']==0)) {
                      </div>
                      <!-- row -->
                      <div class="row">
-                     
-                      
+
+
                         <div class="col-md-12">
                            <div class="white_shd full margin_bottom_30">
                               <div class="full graph_head">
@@ -86,44 +88,44 @@ if (strlen($_SESSION['etmsempid']==0)) {
                                        <tbody>
 
                                           <?php
-                                           $empid=$_SESSION['etmsempid'];
-$sql="SELECT tbltask.ID as tid,tbltask.TaskTitle,tbltask.Status,tbltask.DeptID,tbltask.AssignTaskto,tbltask.TaskEnddate,tbltask.TaskAssigndate,tbldepartment.DepartmentName,tbldepartment.ID as did,tblemployee.EmpName,tblemployee.EmpId from tbltask join tbldepartment on tbldepartment.ID=tbltask.DeptID join tblemployee on tblemployee.ID=tbltask.AssignTaskto where tbltask.AssignTaskto=:empid && tbltask.Status='Completed' ";
-$query = $dbh -> prepare($sql);
-$query-> bindParam(':empid', $empid, PDO::PARAM_STR);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
+                                          $empid = $_SESSION['etmsempid'];
+                                          $sql = "SELECT tbltask.ID as tid,tbltask.TaskTitle,tbltask.Status,tbltask.DeptID,tbltask.AssignTaskto,tbltask.TaskEnddate,tbltask.TaskAssigndate,tbldepartment.DepartmentName,tbldepartment.ID as did,tblemployee.EmpName,tblemployee.EmpId from tbltask join tbldepartment on tbldepartment.ID=tbltask.DeptID join tblemployee on tblemployee.ID=tbltask.AssignTaskto where tbltask.AssignTaskto=:empid && tbltask.Status='Completed' ";
+                                          $query = $dbh->prepare($sql);
+                                          $query->bindParam(':empid', $empid, PDO::PARAM_STR);
+                                          $query->execute();
+                                          $results = $query->fetchAll(PDO::FETCH_OBJ);
 
-$cnt=1;
-if($query->rowCount() > 0)
-{
-foreach($results as $row)
-{               ?> 
-                                          <tr>
-                                              
-                                             <td><?php echo htmlentities($cnt);?></td>
-                                             <td><?php  echo htmlentities($row->TaskTitle);?></td>
-                                             <td><?php  echo htmlentities($row->DepartmentName);?></td>
-                                             <td><?php  echo htmlentities($row->EmpName);?>(<?php  echo htmlentities($row->EmpId);?>)</td>
-                                             <td><?php  echo htmlentities($row->TaskAssigndate);?></td>
-                                             <td><?php  echo htmlentities($row->TaskEnddate);?></td>
-                   <td class="font-w600"><?php  $status=$row->Status;
-if($row->Status==""):   ?>
-<span class="badge bg-danger">Not Updated yet</span>
+                                          $cnt = 1;
+                                          if ($query->rowCount() > 0) {
+                                             foreach ($results as $row) {               ?>
+                                                <tr>
 
-<?php elseif($row->Status=="Inprogress"): ?>
-<span class="badge bg-warning text-dark">In Progress / Process</span>
-<?php elseif($row->Status=="Completed"): ?>
-<span class="badge bg-success">Completed</span>
-<?php endif;?>
-</td>
-                                             <td><a href="view-task.php?viewid=<?php echo htmlentities ($row->tid);?>"> <i  class="material-icons yellow_color">visibility</i></a>
-                                                </td>
-                                          </tr><?php $cnt=$cnt+1;}} else{ ?>
+                                                   <td><?php echo htmlentities($cnt); ?></td>
+                                                   <td><?php echo htmlentities($row->TaskTitle); ?></td>
+                                                   <td><?php echo htmlentities($row->DepartmentName); ?></td>
+                                                   <td><?php echo htmlentities($row->EmpName); ?>(<?php echo htmlentities($row->EmpId); ?>)</td>
+                                                   <td><?php echo htmlentities($row->TaskAssigndate); ?></td>
+                                                   <td><?php echo htmlentities($row->TaskEnddate); ?></td>
+                                                   <td class="font-w600"><?php $status = $row->Status;
+                                                                           if ($row->Status == ""):   ?>
+                                                         <span class="badge bg-danger">Not Updated yet</span>
 
-<tr>
-   <th colspan="8" style="color:red">No Record found</th>
-</tr>
-<?php } ?>
+                                                      <?php elseif ($row->Status == "Inprogress"): ?>
+                                                         <span class="badge bg-warning text-dark">In Progress / Process</span>
+                                                      <?php elseif ($row->Status == "Completed"): ?>
+                                                         <span class="badge bg-success">Completed</span>
+                                                      <?php endif; ?>
+                                                   </td>
+                                                   <td><a href="view-task.php?viewid=<?php echo htmlentities($row->tid); ?>"> <i class="material-icons yellow_color">visibility</i></a>
+                                                   </td>
+                                                </tr><?php $cnt = $cnt + 1;
+                                                   }
+                                                } else { ?>
+
+                                             <tr>
+                                                <th colspan="8" style="color:red">No Record found</th>
+                                             </tr>
+                                          <?php } ?>
                                        </tbody>
                                     </table>
                                  </div>
@@ -133,13 +135,13 @@ if($row->Status==""):   ?>
                      </div>
                   </div>
                   <!-- footer -->
-                 <?php include_once('includes/footer.php');?>
+                  <?php include_once('includes/footer.php'); ?>
                </div>
                <!-- end dashboard inner -->
             </div>
          </div>
          <!-- model popup -->
-       
+
       </div>
       <!-- jQuery -->
       <script src="js/jquery.min.js"></script>
@@ -150,7 +152,7 @@ if($row->Status==""):   ?>
       <!-- select country -->
       <script src="js/bootstrap-select.js"></script>
       <!-- owl carousel -->
-      <script src="js/owl.carousel.js"></script> 
+      <script src="js/owl.carousel.js"></script>
       <!-- chart js -->
       <script src="js/Chart.min.js"></script>
       <script src="js/Chart.bundle.min.js"></script>
@@ -166,7 +168,8 @@ if($row->Status==""):   ?>
       <script src="js/jquery.fancybox.min.js"></script>
       <!-- custom js -->
       <script src="js/custom.js"></script>
-      <!-- calendar file css -->    
+      <!-- calendar file css -->
       <script src="js/semantic.min.js"></script>
    </body>
-</html><?php } ?>
+
+   </html><?php } ?>
